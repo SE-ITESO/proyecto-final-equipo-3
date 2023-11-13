@@ -237,48 +237,41 @@ void LCD_nokia_wdog(){
 
 
 void LCD_MenuScreen(){
-	static uint8_t menu_msg_1[] = "TETRIS ITESO";
-	static uint8_t menu_msg_2[] = "Mantengan presionado";
-	static uint8_t menu_msg_3[] = "ABAJO para comenzar";
+	static uint8_t picture[SIZE_IN_BYTES];
+	LCD_image_GetMainMenu(picture);
 	LCD_nokia_clear(LCD_0);
-	LCD_nokia_goto_xy(0,1,LCD_0);
-	LCD_nokia_send_string(menu_msg_1,LCD_0);
-	LCD_nokia_goto_xy(0,3,LCD_0);
-	LCD_nokia_send_string(menu_msg_2,LCD_0);
-	LCD_nokia_goto_xy(0,4,LCD_0);
-	LCD_nokia_send_string(menu_msg_3,LCD_0);
-
 	LCD_nokia_clear(LCD_1);
-	LCD_nokia_goto_xy(5,1,LCD_1);
-	LCD_nokia_send_string(menu_msg_1,LCD_1);
-	LCD_nokia_goto_xy(0,3,LCD_1);
-	LCD_nokia_send_string(menu_msg_2,LCD_1);
-	LCD_nokia_goto_xy(0,4,LCD_1);
-	LCD_nokia_send_string(menu_msg_3,LCD_1);
+	LCD_nokia_bitmap(picture,LCD_0);
+	LCD_nokia_bitmap(picture,LCD_1);
 }
 
-void LCD_GameOverScreen(){
-	static uint8_t go_msg_1[] = "GAME OVER";
-	static uint8_t go_msg_2[] = "Mantengan presionado";
-	static uint8_t go_msg_3[] = "ABAJO para comenzar";
-	//static uint8_t go_msg_4[] = "Score:";
-	LCD_nokia_clear(LCD_0);
-	LCD_nokia_goto_xy(25,1,LCD_0);
-	LCD_nokia_send_string(go_msg_1,LCD_0);
-	LCD_nokia_goto_xy(10,3,LCD_0);
-	LCD_nokia_send_string(go_msg_2,LCD_0);
-	LCD_nokia_goto_xy(10,4,LCD_0);
-	LCD_nokia_send_string(go_msg_3,LCD_0);
-
-	LCD_nokia_clear(LCD_1);
-	LCD_nokia_goto_xy(25,1,LCD_1);
-	LCD_nokia_send_string(go_msg_1,LCD_1);
-	LCD_nokia_goto_xy(10,3,LCD_1);
-	LCD_nokia_send_string(go_msg_2,LCD_1);
-	LCD_nokia_goto_xy(10,4,LCD_1);
-	LCD_nokia_send_string(go_msg_3,LCD_1);
+void LCD_GameOverScreenWinner(uint8_t selector){
+	//falta añadirle el score
+	static uint8_t picture[SIZE_IN_BYTES];
+	LCD_image_GetWinnerImage(picture);
+	if(1 == selector){
+		LCD_nokia_clear(LCD_0);
+		LCD_nokia_bitmap(picture,LCD_0);
+	}
+	else{
+		LCD_nokia_clear(LCD_1);
+		LCD_nokia_bitmap(picture,LCD_1);
+	}
 }
 
+void LCD_GameOverScreenLoser(uint8_t selector){
+	//falta añadirle el score
+	static uint8_t picture[SIZE_IN_BYTES];
+	LCD_image_GetLoserImage(picture);
+	if(1 == selector){
+		LCD_nokia_clear(LCD_0);
+		LCD_nokia_bitmap(picture,LCD_0);
+	}
+	else{
+		LCD_nokia_clear(LCD_1);
+		LCD_nokia_bitmap(picture,LCD_1);
+	}
+}
 
 
 

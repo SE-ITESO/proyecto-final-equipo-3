@@ -97,7 +97,9 @@ void LCD_LoadingScreen();
 /*Sets the menu screen when initializing the game*/
 void LCD_MenuScreen();
 
-void LCD_GameOverScreen();
+
+void LCD_GameOverScreenWinner(uint8_t selector);
+void LCD_GameOverScreenLoser(uint8_t selector);
 
 void LCD_GameToLCD(game_info_t * gameInfo,uint8_t selector);
 

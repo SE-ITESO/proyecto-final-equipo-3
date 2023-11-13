@@ -257,9 +257,9 @@ void Tetromino_moveLeft(game_info_t * gameInfo) {
     // Check for collisions with the left border or other blocks
     for (i = 0; i < gameInfo->current_tetromino.height; i++) {
         for (j = 0; j < gameInfo->current_tetromino.width; j++) {
-            if (gameInfo->current_tetromino.shape[i][j] && (newTetrominoX + j > 200 ||
+            if (gameInfo->current_tetromino.shape[i][j] && (newTetrominoX + j > INVALID_NUMBER ||
                     (gameInfo->board[gameInfo->TetrominoY + i][newTetrominoX + j] &&
-                    		(!(j - 1 < 200) ||
+                    		(!(j - 1 < INVALID_NUMBER) ||
                      !gameInfo->current_tetromino.shape[i][j - 1])))){
                 // Collision detected; stop moving
                 return;
@@ -432,8 +432,15 @@ void Tetromino_ClearUpdateStatus(uint8_t selector){
 		g_game2Info.needsUpdate = 0;
 }
 
-uint8_t Tetromino_GetGameOverStatus(){
+uint8_t Tetromino_GetGeneralGameOverStatus(){
 	return 1 == g_game1Info.gameOver_f || 1 == g_game2Info.gameOver_f;
+}
+
+uint8_t Tetromino_GetGameOverStatus(uint8_t selector){
+	if(1 == selector)
+		return g_game1Info.gameOver_f;
+	else
+		return g_game2Info.gameOver_f;
 }
 
 void Tetromino_HandlerForGPIO1(port_t port,uint32_t flags){
@@ -478,7 +485,7 @@ void Tetromino_HandlerForGPIO2(port_t port,uint32_t flags){
 
 void Tetromino_ResetFallData(){
 	g_fall_data.counter = 0;
-	g_fall_data.module = 4;
+	g_fall_data.module = 2;
 	g_fall_data.twoMin_f = 0;
 	g_fall_data.fourMin_f = 0;
 }
@@ -490,13 +497,13 @@ void Tetromino_HandlerForPit(){
 		Tetromino_moveDown(&g_game2Info);
 	}
 	if(0 == g_fall_data.twoMin_f){
-		if(0 == g_fall_data.counter % 480){//si ya pasaron 2 min
+		if(0 == g_fall_data.counter % TWO_MIN_MARK){//si ya pasaron 2 min
 			g_fall_data.twoMin_f = 1;
 			g_fall_data.module = 2;
 		}
 	}
 	else if(0 == g_fall_data.fourMin_f){
-		if(0 == g_fall_data.counter % 960){//si ya pasaron 2 min
+		if(0 == g_fall_data.counter % FOUR_MIN_MARK){//si ya pasaron 2 min
 			g_fall_data.fourMin_f = 1;
 			g_fall_data.module = 1;
 		}

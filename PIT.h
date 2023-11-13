@@ -19,7 +19,7 @@
 
 #define WDOG_TIME_US 			1500000 //1s para WDOG
 #define SAMPLE_PERIOD_US	 	62 //16k Frecuencia de muestreo
-#define INGAME_TIME_US	 		250000
+#define INGAME_TIME_US	 		200000
 
 void PIT1_IRQHandler ();
 

@@ -18,6 +18,11 @@
 #define BOARD_WIDTH 10
 #define BOARD_HEIGHT 20
 #define NUMBER_OF_TETROMINOS 7
+#define INVALID_NUMBER 200
+
+#define TWO_MIN_MARK 600
+#define FOUR_MIN_MARK 1200
+
 
 #define P1_DOWN_MASK 0x80000
 #define P1_LEFT_MASK 0x40000
@@ -41,7 +46,8 @@ void Tetromino_HandlerForGPIO1(port_t port,uint32_t flags);
 void Tetromino_HandlerForGPIO2(port_t port,uint32_t flags);
 void Tetromino_HandlerForPit();
 void Tetromino_ResetFallData();
-uint8_t Tetromino_GetGameOverStatus();
+uint8_t Tetromino_GetGeneralGameOverStatus();
+uint8_t Tetromino_GetGameOverStatus(uint8_t selector);
 uint8_t Tetromino_GetUpdateStatus(uint8_t selector);
 void Tetromino_ClearUpdateStatus(uint8_t selector);
 void Tetromino_UpdateGame(uint8_t selector);

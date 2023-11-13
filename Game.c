@@ -9,6 +9,9 @@
 
 state_t g_state;
 
+uint8_t g_score1 = 0;
+uint8_t g_score2 = 0;
+
 void GameInit(){
 	Clock_init();
 	SPI_config();
@@ -58,12 +61,19 @@ void GameRunning(){
 				Tetromino_UpdateGame(GAME2);
 				Tetromino_ClearUpdateStatus(GAME2);
 			}
-			if(1 == Tetromino_GetGameOverStatus()){
+			if(1 == Tetromino_GetGeneralGameOverStatus()){
 				GPIO_Disable_IRQ();
-				//game over image
-				LCD_GameOverScreen();
 				//check who lost and register it
-				//write scores to lcd
+				if(1 == Tetromino_GetGameOverStatus(GAME1)){
+					g_score2++;
+					LCD_GameOverScreenWinner(GAME2);
+					LCD_GameOverScreenLoser(GAME1);
+				}
+				else{
+					g_score1++;
+					LCD_GameOverScreenWinner(GAME1);
+					LCD_GameOverScreenLoser(GAME2);
+				}
 				//stop music
 				//save scores to memory
 				//stop pit 2
