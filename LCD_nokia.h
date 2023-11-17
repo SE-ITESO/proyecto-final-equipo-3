@@ -98,8 +98,8 @@ void LCD_LoadingScreen();
 void LCD_MenuScreen();
 
 
-void LCD_GameOverScreenWinner(uint8_t selector);
-void LCD_GameOverScreenLoser(uint8_t selector);
+void LCD_GameOverScreenWinner(uint8_t selector,uint8_t score);
+void LCD_GameOverScreenLoser(uint8_t selector,uint8_t score);
 
 void LCD_GameToLCD(game_info_t * gameInfo,uint8_t selector);
 

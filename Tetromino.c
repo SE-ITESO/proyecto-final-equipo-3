@@ -8,8 +8,8 @@
 
 #include "Tetromino.h"
 
-game_info_t g_game1Info;
-game_info_t g_game2Info;
+game_info_t g_game1Info = {0};
+game_info_t g_game2Info = {1};
 
 periodic_fall_data_t g_fall_data = {
 	.counter = 0,
@@ -112,6 +112,45 @@ static void Tetromino_CopyTetromino(tetromino_t * a, tetromino_t * b){
 	}
 }
 
+static void Tetromino_MoveUpBoard(game_info_t * gameInfo){
+	static uint8_t m;
+	static uint8_t i;
+	static uint8_t j;
+	for (m = 0; m < gameInfo->rowsToAdd; m++) {
+		// Verificar si el movimiento excede los límites del tablero
+		for (j = 0; j < BOARD_WIDTH; j++) {
+			if (gameInfo->board[0][j]) {
+				// El movimiento excede los límites del tablero
+				gameInfo->gameOver_f = 1;
+				return;
+			}
+		}
+
+		// Realizar el movimiento del tablero hacia arriba
+		for (i = 0; i < BOARD_HEIGHT - 1; i++) {
+			for (j = 0; j < BOARD_WIDTH; j++) {
+				gameInfo->board[i][j] = gameInfo->board[i + 1][j];
+			}
+		}
+	}
+}
+
+static void Tetromino_FillRandomRows(game_info_t * gameInfo){
+	static uint8_t i;
+	static uint8_t j;
+	static uint8_t randomBlock;
+	for (i = 0; i < gameInfo->rowsToAdd; i++) {
+		randomBlock = PIT_GetCountValue() % BOARD_WIDTH; // Generar la posición del bloque vacío
+		for (j = 0; j < BOARD_WIDTH; j++) {
+			if (j == randomBlock) {
+				gameInfo->board[BOARD_HEIGHT - 1 - i][j] = 0; // Bloque vacío
+			} else {
+				gameInfo->board[BOARD_HEIGHT - 1 - i][j] = 1; // Bloque lleno
+			}
+		}
+	}
+}
+
 static void Tetromino_WriteTetromino(game_info_t * gameInfo){
     static uint8_t i;
 	static uint8_t j;
@@ -150,6 +189,8 @@ static void Tetromino_ResetGameStatus(game_info_t * game){
 		}
 	}
 
+	game->rowsToAdd = 0;
+	game->counterToAddRows = 0;
 }
 
 void Tetromino_ResetAndStart(){
@@ -201,6 +242,7 @@ void Tetromino_HoldTetromino(game_info_t * gameInfo){
 	static tetromino_t temp_tetromino;
 	if(1 == gameInfo->canHold){
 
+		Tetromino_DeleteTetromino(gameInfo);
 		Tetromino_CopyTetromino(&temp_tetromino,&gameInfo->hold_tetromino);
 		gameInfo->hold_tetromino = gameInfo->current_tetromino;
 		gameInfo->current_tetromino = temp_tetromino;
@@ -245,36 +287,36 @@ void Tetromino_moveDown(game_info_t * gameInfo) {
 
 		// Update tetromino y position and ask for update
 		gameInfo->TetrominoY = newTetrominoY;
-		gameInfo->needsUpdate = 1;
 		Tetromino_WriteTetromino(gameInfo);
     }
+	gameInfo->needsUpdate = 1;
 }
 
 void Tetromino_moveLeft(game_info_t * gameInfo) {
     uint8_t newTetrominoX = gameInfo->TetrominoX - 1;
     static uint8_t i;
     static uint8_t j;
-    // Check for collisions with the left border or other blocks
-    for (i = 0; i < gameInfo->current_tetromino.height; i++) {
-        for (j = 0; j < gameInfo->current_tetromino.width; j++) {
-            if (gameInfo->current_tetromino.shape[i][j] && (newTetrominoX + j > INVALID_NUMBER ||
-                    (gameInfo->board[gameInfo->TetrominoY + i][newTetrominoX + j] &&
-                    		(!(j - 1 < INVALID_NUMBER) ||
-                     !gameInfo->current_tetromino.shape[i][j - 1])))){
-                // Collision detected; stop moving
-                return;
-            }
-        }
-    }
+	if(gameInfo->canMoveDown){
+		// Check for collisions with the left border or other blocks
+		for (i = 0; i < gameInfo->current_tetromino.height; i++) {
+			for (j = 0; j < gameInfo->current_tetromino.width; j++) {
+				if (gameInfo->current_tetromino.shape[i][j] && (newTetrominoX + j > INVALID_NUMBER ||
+						(gameInfo->board[gameInfo->TetrominoY + i][newTetrominoX + j] &&
+								(!(j - 1 < INVALID_NUMBER) ||
+						 !gameInfo->current_tetromino.shape[i][j - 1])))){
+					// Collision detected; stop moving
+					return;
+				}
+			}
+		}
 
-    Tetromino_DeleteTetromino(gameInfo);
+		Tetromino_DeleteTetromino(gameInfo);
 
-    // Update tetromino x position and ask for update
-    gameInfo->TetrominoX = newTetrominoX;
-    gameInfo->needsUpdate = 1;
-
-    Tetromino_WriteTetromino(gameInfo);
-
+		// Update tetromino x position and ask for update
+		gameInfo->TetrominoX = newTetrominoX;
+		Tetromino_WriteTetromino(gameInfo);
+	}
+	gameInfo->needsUpdate = 1;
 }
 
 void Tetromino_moveRight(game_info_t * gameInfo) {
@@ -282,26 +324,27 @@ void Tetromino_moveRight(game_info_t * gameInfo) {
     static uint8_t i;
     static uint8_t j;
 
-    // Check for collisions with the right border or other blocks
-    for (i = 0; i < gameInfo->current_tetromino.height; i++) {
-        for (j = 0; j < gameInfo->current_tetromino.width; j++) {
-            if (gameInfo->current_tetromino.shape[i][j] && (newTetrominoX + j >= BOARD_WIDTH ||
-                    (gameInfo->board[gameInfo->TetrominoY + i][newTetrominoX + j] &&
-                    		(!(1 + j < gameInfo->current_tetromino.width) ||
-                     !gameInfo->current_tetromino.shape[i][j + 1])))) {
-                // Collision detected; stop moving
-                return;
-            }
-        }
-    }
+	if(gameInfo->canMoveDown){
+		// Check for collisions with the right border or other blocks
+		for (i = 0; i < gameInfo->current_tetromino.height; i++) {
+			for (j = 0; j < gameInfo->current_tetromino.width; j++) {
+				if (gameInfo->current_tetromino.shape[i][j] && (newTetrominoX + j >= BOARD_WIDTH ||
+						(gameInfo->board[gameInfo->TetrominoY + i][newTetrominoX + j] &&
+								(!(1 + j < gameInfo->current_tetromino.width) ||
+						 !gameInfo->current_tetromino.shape[i][j + 1])))) {
+					// Collision detected; stop moving
+					return;
+				}
+			}
+		}
 
-    Tetromino_DeleteTetromino(gameInfo);
+		Tetromino_DeleteTetromino(gameInfo);
 
-    // Update tetromino x position and ask for update
-    gameInfo->TetrominoX = newTetrominoX;
-    gameInfo->needsUpdate = 1;
-
-    Tetromino_WriteTetromino(gameInfo);
+		// Update tetromino x position and ask for update
+		gameInfo->TetrominoX = newTetrominoX;
+		Tetromino_WriteTetromino(gameInfo);
+	}
+	gameInfo->needsUpdate = 1;
 }
 
 
@@ -310,39 +353,41 @@ void Tetromino_rotateClockwise(game_info_t * gameInfo) {
     static tetromino_t rotatedTetromino;
     static uint8_t i;
 	static uint8_t j;
-	Tetromino_CopyTetromino(&rotatedTetromino,&g_empty_tetromino);
-    rotatedTetromino.width = gameInfo->current_tetromino.height;
-    rotatedTetromino.height = gameInfo->current_tetromino.width;
+	if(gameInfo->canMoveDown){
+		Tetromino_CopyTetromino(&rotatedTetromino,&g_empty_tetromino);
+		rotatedTetromino.width = gameInfo->current_tetromino.height;
+		rotatedTetromino.height = gameInfo->current_tetromino.width;
 
-    for (i = 0; i < gameInfo->current_tetromino.height; i++) {
-        for (j = 0; j < gameInfo->current_tetromino.width; j++) {
-            rotatedTetromino.shape[j][gameInfo->current_tetromino.height - 1 - i] = gameInfo->current_tetromino.shape[i][j];
-        }
-    }
+		for (i = 0; i < gameInfo->current_tetromino.height; i++) {
+			for (j = 0; j < gameInfo->current_tetromino.width; j++) {
+				rotatedTetromino.shape[j][gameInfo->current_tetromino.height - 1 - i] = gameInfo->current_tetromino.shape[i][j];
+			}
+		}
 
-    // Check for collisions with the borders or other blocks after rotation
-    for (i = 0; i < rotatedTetromino.height; i++) {
-        for (j = 0; j < rotatedTetromino.width; j++) {
-            if (rotatedTetromino.shape[i][j] && (gameInfo->TetrominoX + j < 0 || gameInfo->TetrominoX + j >= BOARD_WIDTH || gameInfo->TetrominoY + i >= BOARD_HEIGHT ||
-                    (gameInfo->board[gameInfo->TetrominoY + i][gameInfo->TetrominoX + j] && !rotatedTetromino.shape[i][j]))) {
-                // Collision detected; cannot rotate
-                return;
-            }
-        }
-    }
+		// Check for collisions with the borders or other blocks after rotation
+		for (i = 0; i < rotatedTetromino.height; i++) {
+			for (j = 0; j < rotatedTetromino.width; j++) {
+				if (rotatedTetromino.shape[i][j] && (gameInfo->TetrominoX + j >= BOARD_WIDTH ||
+						gameInfo->TetrominoY + i >= BOARD_HEIGHT ||
+						(gameInfo->board[gameInfo->TetrominoY + i][gameInfo->TetrominoX + j] && !gameInfo->current_tetromino.shape[i][j]))) {
+					// Collision detected; cannot rotate
+					return;
+				}
+			}
+		}
 
-    Tetromino_DeleteTetromino(gameInfo);
+		Tetromino_DeleteTetromino(gameInfo);
 
-    Tetromino_CopyTetromino(&gameInfo->current_tetromino,&rotatedTetromino);
+		Tetromino_CopyTetromino(&gameInfo->current_tetromino,&rotatedTetromino);
+		Tetromino_WriteTetromino(gameInfo);
+	}
     gameInfo->needsUpdate = 1;
-
-
-    Tetromino_WriteTetromino(gameInfo);
 }
 
 void Tetromino_UpdateOneGame(game_info_t * gameInfo){
 	uint8_t linecomplete;
 	uint8_t completedLines = 0;
+	static game_info_t * otherGameInfo;
 	static uint8_t i;
 	static uint8_t j;
 	static uint8_t k;
@@ -381,37 +426,63 @@ void Tetromino_UpdateOneGame(game_info_t * gameInfo){
 		}
 		else{
 			//SI SE TIENE FILAS POR AÑADIR, REDUCIR ESAS FILAS
-
+			if(4 == completedLines)	//Si se hizo un tetris, dar un boost + 1
+				completedLines ++;
+			if(0 < gameInfo->rowsToAdd){
+				//Si las pendientes son mas que las que quitaras, solo quitalas
+				if(gameInfo->rowsToAdd > completedLines)
+					gameInfo->rowsToAdd -= completedLines;
+				else{
+					//de otra manera solo igualalo a 0 y resetea para añadir filas
+					gameInfo->rowsToAdd = 0;
+					gameInfo->counterToAddRows = 0;
+				}
+			}
 			//MANDAR FILAS AL OTRO TAL
+			//identificar el otro game para mandarle a el otro las filas
+			if(0 == gameInfo->id)
+				otherGameInfo = &g_game2Info;
+			else
+				otherGameInfo = &g_game1Info;
+			//si lo que le sumaremos mas lo que ya tiene es menor que el maximo, sumalo
+			if(completedLines + otherGameInfo->rowsToAdd <= MAX_ADD_LINES)
+				otherGameInfo->rowsToAdd += completedLines;
+			else	//si no solo ponle el maximo
+				otherGameInfo->rowsToAdd = 16;
+			//e indica que se tiene que actualizar para que se visualice la barra
+			otherGameInfo->needsUpdate = 1;
+		}
+
+		//si tienes que filas por agregar
+		if(0 != gameInfo->rowsToAdd){
+			//aumentar el contador y si llega a 4, agregar filas
+			gameInfo->counterToAddRows++;
+			if(4 == gameInfo->counterToAddRows){
+				gameInfo->counterToAddRows = 0;
+				//recorrer el arreglo hacia arriba
+				Tetromino_MoveUpBoard(gameInfo);
+				//agregar filas
+				Tetromino_FillRandomRows(gameInfo);
+				gameInfo->rowsToAdd = 0;
+			}
 		}
 
 
 		if(!gameInfo->gameOver_f)
 			Tetromino_nextTetromino(gameInfo);
 	}
-
-	/*if(1 == addLines){	//Si pasó el tiempo para que sea necesario agregar lineas
-		//recorrer lineas x cantidad arriba
-		//poner x lineas con solo un bloque faltante. El bloque faltante se define por rand()
-		addLines = 0;
-	}*/
-
-
-
 }
 
 void Tetromino_UpdateGame(uint8_t selector) {
 	if(1 == selector){
 		Tetromino_UpdateOneGame(&g_game1Info);
 		if(!g_game1Info.gameOver_f && !g_game2Info.gameOver_f){
-			//BITMAP Y MANDAR A LCD
 			LCD_GameToLCD(&g_game1Info,selector - 1);
 		}
 	}
 	else{
 		Tetromino_UpdateOneGame(&g_game2Info);
 		if(!g_game1Info.gameOver_f && !g_game2Info.gameOver_f){
-			//BITMAP Y MANDAR A LCD
 			LCD_GameToLCD(&g_game2Info,selector - 1);
 		}
 	}

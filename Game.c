@@ -66,13 +66,13 @@ void GameRunning(){
 				//check who lost and register it
 				if(1 == Tetromino_GetGameOverStatus(GAME1)){
 					g_score2++;
-					LCD_GameOverScreenWinner(GAME2);
-					LCD_GameOverScreenLoser(GAME1);
+					LCD_GameOverScreenWinner(GAME2,g_score2);
+					LCD_GameOverScreenLoser(GAME1,g_score1);
 				}
 				else{
 					g_score1++;
-					LCD_GameOverScreenWinner(GAME1);
-					LCD_GameOverScreenLoser(GAME2);
+					LCD_GameOverScreenWinner(GAME1,g_score1);
+					LCD_GameOverScreenLoser(GAME2,g_score2);
 				}
 				//stop music
 				//save scores to memory

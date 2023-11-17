@@ -34,6 +34,8 @@
 #define P2_RIGHT_MASK 0x200
 #define P2_ROTATE_MASK 1
 
+#define MAX_ADD_LINES 16
+
 typedef struct{
 	uint16_t counter;
 	uint8_t module;

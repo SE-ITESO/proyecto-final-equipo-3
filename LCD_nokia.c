@@ -111,6 +111,214 @@ static const uint8_t ASCII[][5] =
 ,{0x78, 0x46, 0x41, 0x46, 0x78} // 7f
 };
 
+static void LCD_image_to_Score (uint8_t * picture, uint8_t score){
+	uint8_t unidades = score % 10;
+	uint8_t decenas = score / 10;
+	switch(unidades){
+	    case 9:
+	        picture[40]|=0x60;
+	        picture[41]|=0x90;
+	        picture[42]|=0x90;
+	        picture[43]|=0x70;
+	        picture[44]|=0x10;
+	        picture[45]|=0x10;
+	        picture[46]|=0x10;
+	        picture[47]|=0x10;
+	        break;
+	    case 8:
+	        picture[40]|=0x60;
+	        picture[41]|=0x90;
+	        picture[42]|=0x90;
+	        picture[43]|=0x60;
+	        picture[44]|=0x90;
+	        picture[45]|=0x90;
+	        picture[46]|=0x90;
+	        picture[47]|=0x60;
+	        break;
+	    case 7:
+	        picture[40]|=0xf0;
+	        picture[41]|=0x10;
+	        picture[42]|=0x10;
+	        picture[43]|=0x70;
+	        picture[44]|=0x10;
+	        picture[45]|=0x10;
+	        picture[46]|=0x10;
+	        picture[47]|=0x10;
+	        break;
+	    case 6:
+	        picture[40]|=0x70;
+	        picture[41]|=0x80;
+	        picture[42]|=0x80;
+	        picture[43]|=0x60;
+	        picture[44]|=0x90;
+	        picture[45]|=0x90;
+	        picture[46]|=0x90;
+	        picture[47]|=0x60;
+	        break;
+	    case 5:
+	        picture[40]|=0xf0;
+	        picture[41]|=0x80;
+	        picture[42]|=0x80;
+	        picture[43]|=0xe0;
+	        picture[44]|=0x10;
+	        picture[45]|=0x10;
+	        picture[46]|=0x10;
+	        picture[47]|=0xe0;
+	        break;
+	    case 4:
+	        picture[40]|=0x90;
+	        picture[41]|=0x90;
+	        picture[42]|=0x90;
+	        picture[43]|=0x70;
+	        picture[44]|=0x10;
+	        picture[45]|=0x10;
+	        picture[46]|=0x10;
+	        picture[47]|=0x10;
+	        break;
+	    case 3:
+	        picture[40]|=0xe0;
+	        picture[41]|=0x10;
+	        picture[42]|=0x10;
+	        picture[43]|=0x60;
+	        picture[44]|=0x10;
+	        picture[45]|=0x10;
+	        picture[46]|=0x10;
+	        picture[47]|=0xe0;
+	        break;
+	    case 2:
+	        picture[40]|=0x60;
+	        picture[41]|=0x90;
+	        picture[42]|=0x10;
+	        picture[43]|=0x20;
+	        picture[44]|=0x40;
+	        picture[45]|=0x80;
+	        picture[46]|=0x80;
+	        picture[47]|=0xf0;
+	        break;
+	    case 1:
+	        picture[40]|=0x20;
+	        picture[41]|=0x60;
+	        picture[42]|=0x20;
+	        picture[43]|=0x20;
+	        picture[44]|=0x20;
+	        picture[45]|=0x20;
+	        picture[46]|=0x20;
+	        picture[47]|=0x70;
+	        break;
+	    case 0:
+	        picture[40]|=0x60;
+	        picture[41]|=0x90;
+	        picture[42]|=0x90;
+	        picture[43]|=0x90;
+	        picture[44]|=0x90;
+	        picture[45]|=0x90;
+	        picture[46]|=0x90;
+	        picture[47]|=0x60;
+	        break;
+	    }
+	switch(decenas){
+		case 9:
+			picture[124]|=0x0C;
+			picture[125]|=0x12;
+			picture[126]|=0x12;
+			picture[127]|=0x0E;
+			picture[128]|=0x01;
+			picture[129]|=0x01;
+			picture[130]|=0x01;
+			picture[131]|=0x01;
+			break;
+		case 8:
+			picture[124]|=0x0C;
+			picture[125]|=0x12;
+			picture[126]|=0x12;
+			picture[127]|=0x0C;
+			picture[128]|=0x12;
+			picture[129]|=0x12;
+			picture[130]|=0x12;
+			picture[131]|=0x0C;
+			break;
+		case 7:
+			picture[124]|=0x1E;
+			picture[125]|=0x02;
+			picture[126]|=0x02;
+			picture[127]|=0x0E;
+			picture[128]|=0x02;
+			picture[129]|=0x02;
+			picture[130]|=0x02;
+			picture[131]|=0x02;
+			break;
+		case 6:
+			picture[124]|=0x0E;
+			picture[125]|=0x10;
+			picture[126]|=0x10;
+			picture[127]|=0x0C;
+			picture[128]|=0x12;
+			picture[129]|=0x12;
+			picture[130]|=0x12;
+			picture[131]|=0x0C;
+			break;
+		case 5:
+			picture[124]|=0x1E;
+			picture[125]|=0x10;
+			picture[126]|=0x10;
+			picture[127]|=0x1C;
+			picture[128]|=0x20;
+			picture[129]|=0x20;
+			picture[130]|=0x20;
+			picture[131]|=0x1C;
+			break;
+		case 4:
+			picture[124]|=0x12;
+			picture[125]|=0x12;
+			picture[126]|=0x12;
+			picture[127]|=0x0E;
+			picture[128]|=0x02;
+			picture[129]|=0x02;
+			picture[130]|=0x02;
+			picture[131]|=0x02;
+			break;
+		case 3:
+			picture[124]|=0x1C;
+			picture[125]|=0x02;
+			picture[126]|=0x02;
+			picture[127]|=0x0C;
+			picture[128]|=0x02;
+			picture[129]|=0x02;
+			picture[130]|=0x02;
+			picture[131]|=0x1C;
+			break;
+		case 2:
+			picture[124]|=0x0C;
+			picture[125]|=0x12;
+			picture[126]|=0x02;
+			picture[127]|=0x04;
+			picture[128]|=0x08;
+			picture[129]|=0x10;
+			picture[130]|=0x10;
+			picture[131]|=0x1E;
+			break;
+		case 1:
+			picture[124]|=0x04;
+			picture[125]|=0x0C;
+			picture[126]|=0x04;
+			picture[127]|=0x04;
+			picture[128]|=0x04;
+			picture[129]|=0x04;
+			picture[130]|=0x04;
+			picture[131]|=0x0E;
+			break;
+		case 0:
+			picture[124]|=0x0C;
+			picture[125]|=0x12;
+			picture[126]|=0x12;
+			picture[127]|=0x12;
+			picture[128]|=0x12;
+			picture[129]|=0x12;
+			picture[130]|=0x12;
+			picture[131]|=0x0C;
+			break;
+		}
+}
 
 static void LCD_nokia_delay(void)
 {
@@ -245,10 +453,11 @@ void LCD_MenuScreen(){
 	LCD_nokia_bitmap(picture,LCD_1);
 }
 
-void LCD_GameOverScreenWinner(uint8_t selector){
+void LCD_GameOverScreenWinner(uint8_t selector,uint8_t score){
 	//falta añadirle el score
 	static uint8_t picture[SIZE_IN_BYTES];
 	LCD_image_GetWinnerImage(picture);
+	LCD_image_to_Score(picture,score);
 	if(1 == selector){
 		LCD_nokia_clear(LCD_0);
 		LCD_nokia_bitmap(picture,LCD_0);
@@ -259,10 +468,11 @@ void LCD_GameOverScreenWinner(uint8_t selector){
 	}
 }
 
-void LCD_GameOverScreenLoser(uint8_t selector){
+void LCD_GameOverScreenLoser(uint8_t selector,uint8_t score){
 	//falta añadirle el score
 	static uint8_t picture[SIZE_IN_BYTES];
 	LCD_image_GetLoserImage(picture);
+	LCD_image_to_Score(picture,score);
 	if(1 == selector){
 		LCD_nokia_clear(LCD_0);
 		LCD_nokia_bitmap(picture,LCD_0);
