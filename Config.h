@@ -20,13 +20,15 @@ typedef struct{
 }tetromino_t;
 
 typedef struct{
+	uint8_t id;
 	uint8_t gameOver_f;
 	uint8_t board[BOARD_HEIGHT][BOARD_WIDTH];
 	tetromino_t current_tetromino;
 	tetromino_t next_tetromino;
 	tetromino_t hold_tetromino;
 	uint8_t canHold;
-	//uint8_t addLines;
+	uint8_t rowsToAdd;
+	uint8_t counterToAddRows;
 	uint8_t TetrominoX;
 	uint8_t TetrominoY;
 	uint8_t canMoveDown;

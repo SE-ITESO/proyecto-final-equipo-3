@@ -10,9 +10,9 @@
 #ifndef DMA_H_
 #define DMA_H_
 
+#include <Music.h>
 #include "fsl_dmamux.h"
 #include "fsl_edma.h"
-#include "Sounds.h"
 #include "PIT.h"
 #include "DAC.h"
 
@@ -23,6 +23,6 @@
 #define DAC0_L_ADDR (uint32_t *) 0x400CC000
 
 void DMA_init();
-void DMA_SendSound(uint16_t * source, uint16_t size);
+void DMA_SendMusic(uint16_t * source, uint32_t size);
 
 #endif /* DMA_H_ */

@@ -35,7 +35,7 @@ static void StartGame(){
 	//reset status,boards and flags and show game
 	Tetromino_ResetAndStart();
 	//star music
-
+	Music_PlayMusic();
 	//start pit 2
 	Tetromino_ResetFallData();
 	PIT_StartTimer(PIT, kPIT_Chnl_2);	//Habilita el timer del pit1
@@ -75,6 +75,7 @@ void GameRunning(){
 					LCD_GameOverScreenLoser(GAME2,g_score2);
 				}
 				//stop music
+				Music_StopMusic();
 				//save scores to memory
 				//stop pit 2
 				PIT_StopTimer(PIT, kPIT_Chnl_2);	//Habilita el timer del pit1

@@ -74,6 +74,214 @@
 #define DATA_OR_CMD_PIN pin5
 #define RESET_PIN pin7
 
+#define LCD_Contrast 0xBF
+#define LCD_Temp_Coef 0x04
+#define LCD_BiasMode 0x14
+#define LCD_DispControl 0x0c
+#define LCD_PreDispControl 0x20
+#define LCD_Ext_comm 0x21
+
+
+#define Bar_Mask_16 432
+#define Bar_Mask_15 436
+#define Bar_Mask_14 440
+#define Bar_Mask_13 444
+#define Bar_Mask_12 447
+#define Bar_Mask_11 451
+#define Bar_Mask_10 455
+#define Bar_Mask_9 459
+#define Bar_Mask_8 462
+#define Bar_Mask_7 466
+#define Bar_Mask_6 470
+#define Bar_Mask_5 474
+#define Bar_Mask_4 477
+#define Bar_Mask_3 481
+#define Bar_Mask_2 485
+#define Bar_Mask_1 489
+#define Bar_Mask_limit 492
+#define Bar_Mask_LCD 0XE0
+
+#define Score_Unit_9_val_1 0x60
+#define Score_Unit_9_val_2 0x90
+#define Score_Unit_9_val_3 0x90
+#define Score_Unit_9_val_4 0x70
+#define Score_Unit_9_val_5 0x10
+#define Score_Unit_9_val_6 0x10
+#define Score_Unit_9_val_7 0x10
+#define Score_Unit_9_val_8 0x10
+
+#define Score_Unit_8_val_1 0x60
+#define Score_Unit_8_val_2 0x90
+#define Score_Unit_8_val_3 0x90
+#define Score_Unit_8_val_4 0x60
+#define Score_Unit_8_val_5 0x90
+#define Score_Unit_8_val_6 0x90
+#define Score_Unit_8_val_7 0x90
+#define Score_Unit_8_val_8 0x90
+
+#define Score_Unit_7_val_1 0xf0
+#define Score_Unit_7_val_2 0x10
+#define Score_Unit_7_val_3 0x10
+#define Score_Unit_7_val_4 0x70
+#define Score_Unit_7_val_5 0x10
+#define Score_Unit_7_val_6 0x10
+#define Score_Unit_7_val_7 0x10
+#define Score_Unit_7_val_8 0x10
+
+#define Score_Unit_6_val_1 0x70
+#define Score_Unit_6_val_2 0x80
+#define Score_Unit_6_val_3 0x80
+#define Score_Unit_6_val_4 0x60
+#define Score_Unit_6_val_5 0x90
+#define Score_Unit_6_val_6 0x90
+#define Score_Unit_6_val_7 0x90
+#define Score_Unit_6_val_8 0x60
+
+#define Score_Unit_5_val_1 0xf0
+#define Score_Unit_5_val_2 0x80
+#define Score_Unit_5_val_3 0x80
+#define Score_Unit_5_val_4 0xe0
+#define Score_Unit_5_val_5 0x10
+#define Score_Unit_5_val_6 0x10
+#define Score_Unit_5_val_7 0x10
+#define Score_Unit_5_val_8 0xe0
+
+#define Score_Unit_4_val_1 0x90
+#define Score_Unit_4_val_2 0x90
+#define Score_Unit_4_val_3 0x90
+#define Score_Unit_4_val_4 0x70
+#define Score_Unit_4_val_5 0x10
+#define Score_Unit_4_val_6 0x10
+#define Score_Unit_4_val_7 0x10
+#define Score_Unit_4_val_8 0x10
+
+#define Score_Unit_3_val_1 0xe0
+#define Score_Unit_3_val_2 0x10
+#define Score_Unit_3_val_3 0x10
+#define Score_Unit_3_val_4 0x60
+#define Score_Unit_3_val_5 0x10
+#define Score_Unit_3_val_6 0x10
+#define Score_Unit_3_val_7 0x10
+#define Score_Unit_3_val_8 0xe0
+
+#define Score_Unit_2_val_1 0x60
+#define Score_Unit_2_val_2 0x90
+#define Score_Unit_2_val_3 0x10
+#define Score_Unit_2_val_4 0x20
+#define Score_Unit_2_val_5 0x40
+#define Score_Unit_2_val_6 0x80
+#define Score_Unit_2_val_7 0x80
+#define Score_Unit_2_val_8 0xf0
+
+#define Score_Unit_1_val_1 0x20
+#define Score_Unit_1_val_2 0x60
+#define Score_Unit_1_val_3 0x20
+#define Score_Unit_1_val_4 0x20
+#define Score_Unit_1_val_5 0x20
+#define Score_Unit_1_val_6 0x20
+#define Score_Unit_1_val_7 0x20
+#define Score_Unit_1_val_8 0x70
+
+#define Score_Unit_0_val_1 0x60
+#define Score_Unit_0_val_2 0x90
+#define Score_Unit_0_val_3 0x90
+#define Score_Unit_0_val_4 0x90
+#define Score_Unit_0_val_5 0x90
+#define Score_Unit_0_val_6 0x90
+#define Score_Unit_0_val_7 0x90
+#define Score_Unit_0_val_8 0x60
+
+///////////////////////////////
+#define Score_D_9_val_1 0x0C
+#define Score_D_9_val_2 0x12
+#define Score_D_9_val_3 0x12
+#define Score_D_9_val_4 0x0E
+#define Score_D_9_val_5 0x01
+#define Score_D_9_val_6 0x01
+#define Score_D_9_val_7 0x01
+#define Score_D_9_val_8 0x01
+
+#define Score_D_8_val_1 0x0C
+#define Score_D_8_val_2 0x12
+#define Score_D_8_val_3 0x12
+#define Score_D_8_val_4 0x0C
+#define Score_D_8_val_5 0x12
+#define Score_D_8_val_6 0x12
+#define Score_D_8_val_7 0x12
+#define Score_D_8_val_8 0x0C
+
+#define Score_D_7_val_1 0x1E
+#define Score_D_7_val_2 0x02
+#define Score_D_7_val_3 0x02
+#define Score_D_7_val_4 0x0E
+#define Score_D_7_val_5 0x02
+#define Score_D_7_val_6 0x02
+#define Score_D_7_val_7 0x02
+#define Score_D_7_val_8 0x02
+
+#define Score_D_6_val_1 0x0E
+#define Score_D_6_val_2 0x10
+#define Score_D_6_val_3 0x10
+#define Score_D_6_val_4 0x0C
+#define Score_D_6_val_5 0x12
+#define Score_D_6_val_6 0x12
+#define Score_D_6_val_7 0x12
+#define Score_D_6_val_8 0x0C
+
+#define Score_D_5_val_1 0x1E
+#define Score_D_5_val_2 0x10
+#define Score_D_5_val_3 0x10
+#define Score_D_5_val_4 0x1C
+#define Score_D_5_val_5 0x02
+#define Score_D_5_val_6 0x02
+#define Score_D_5_val_7 0x02
+#define Score_D_5_val_8 0x1C
+
+#define Score_D_4_val_1 0x12
+#define Score_D_4_val_2 0x12
+#define Score_D_4_val_3 0x12
+#define Score_D_4_val_4 0x0E
+#define Score_D_4_val_5 0x02
+#define Score_D_4_val_6 0x02
+#define Score_D_4_val_7 0x02
+#define Score_D_4_val_8 0x02
+
+#define Score_D_3_val_1 0x1C
+#define Score_D_3_val_2 0x02
+#define Score_D_3_val_3 0x02
+#define Score_D_3_val_4 0x0C
+#define Score_D_3_val_5 0x02
+#define Score_D_3_val_6 0x02
+#define Score_D_3_val_7 0x02
+#define Score_D_3_val_8 0x1C
+
+#define Score_D_2_val_1 0x0c
+#define Score_D_2_val_2 0x12
+#define Score_D_2_val_3 0x02
+#define Score_D_2_val_4 0x04
+#define Score_D_2_val_5 0x08
+#define Score_D_2_val_6 0x10
+#define Score_D_2_val_7 0x10
+#define Score_D_2_val_8 0x1e
+
+#define Score_D_1_val_1 0x04
+#define Score_D_1_val_2 0x0c
+#define Score_D_1_val_3 0x04
+#define Score_D_1_val_4 0x04
+#define Score_D_1_val_5 0x04
+#define Score_D_1_val_6 0x04
+#define Score_D_1_val_7 0x04
+#define Score_D_1_val_8 0x0e
+
+#define Score_D_0_val_1 0x0c
+#define Score_D_0_val_2 0x12
+#define Score_D_0_val_3 0x12
+#define Score_D_0_val_4 0x12
+#define Score_D_0_val_5 0x12
+#define Score_D_0_val_6 0x12
+#define Score_D_0_val_7 0x12
+#define Score_D_0_val_8 0x0c
+
 /*It configures the LCD*/
 void LCD_nokia_init(void);
 /*It writes a byte in the LCD memory. The place of writting is the last place that was indicated by LCDNokia_gotoXY. In the reset state
@@ -102,7 +310,6 @@ void LCD_GameOverScreenWinner(uint8_t selector,uint8_t score);
 void LCD_GameOverScreenLoser(uint8_t selector,uint8_t score);
 
 void LCD_GameToLCD(game_info_t * gameInfo,uint8_t selector);
-
 
 
 

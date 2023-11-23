@@ -111,217 +111,214 @@ static const uint8_t ASCII[][5] =
 ,{0x78, 0x46, 0x41, 0x46, 0x78} // 7f
 };
 
-
-
 static void LCD_image_to_Score (uint8_t * picture, uint8_t score){
 	uint8_t unidades = score % 10;
 	uint8_t decenas = score / 10;
 	switch(unidades){
 	    case 9:
-	        picture[40]|=0x60;
-	        picture[41]|=0x90;
-	        picture[42]|=0x90;
-	        picture[43]|=0x70;
-	        picture[44]|=0x10;
-	        picture[45]|=0x10;
-	        picture[46]|=0x10;
-	        picture[47]|=0x10;
+	        picture[40]|= Score_Unit_9_val_1;
+	        picture[41]|= Score_Unit_9_val_2;
+	        picture[42]|= Score_Unit_9_val_3;
+	        picture[43]|= Score_Unit_9_val_4;
+	        picture[44]|= Score_Unit_9_val_5;
+	        picture[45]|= Score_Unit_9_val_6;
+	        picture[46]|= Score_Unit_9_val_7;
+	        picture[47]|= Score_Unit_9_val_8;
 	        break;
 	    case 8:
-	        picture[40]|=0x60;
-	        picture[41]|=0x90;
-	        picture[42]|=0x90;
-	        picture[43]|=0x60;
-	        picture[44]|=0x90;
-	        picture[45]|=0x90;
-	        picture[46]|=0x90;
-	        picture[47]|=0x60;
+	        picture[40]|= Score_Unit_8_val_1;
+	        picture[41]|= Score_Unit_8_val_2;
+	        picture[42]|= Score_Unit_8_val_3;
+	        picture[43]|= Score_Unit_8_val_4;
+	        picture[44]|= Score_Unit_8_val_5;
+	        picture[45]|= Score_Unit_8_val_6;
+	        picture[46]|= Score_Unit_8_val_7;
+	        picture[47]|= Score_Unit_8_val_8;
 	        break;
 	    case 7:
-	        picture[40]|=0xf0;
-	        picture[41]|=0x10;
-	        picture[42]|=0x10;
-	        picture[43]|=0x70;
-	        picture[44]|=0x10;
-	        picture[45]|=0x10;
-	        picture[46]|=0x10;
-	        picture[47]|=0x10;
+	        picture[40]|= Score_Unit_7_val_1;
+	        picture[41]|= Score_Unit_7_val_2;
+	        picture[42]|= Score_Unit_7_val_3;
+	        picture[43]|= Score_Unit_7_val_4;
+	        picture[44]|= Score_Unit_7_val_5;
+	        picture[45]|= Score_Unit_7_val_6;
+	        picture[46]|= Score_Unit_7_val_7;
+	        picture[47]|= Score_Unit_7_val_8;
 	        break;
 	    case 6:
-	        picture[40]|=0x70;
-	        picture[41]|=0x80;
-	        picture[42]|=0x80;
-	        picture[43]|=0x60;
-	        picture[44]|=0x90;
-	        picture[45]|=0x90;
-	        picture[46]|=0x90;
-	        picture[47]|=0x60;
+	        picture[40]|= Score_Unit_6_val_1;
+	        picture[41]|= Score_Unit_6_val_2;
+	        picture[42]|= Score_Unit_6_val_3;
+	        picture[43]|= Score_Unit_6_val_4;
+	        picture[44]|= Score_Unit_6_val_5;
+	        picture[45]|= Score_Unit_6_val_6;
+	        picture[46]|= Score_Unit_6_val_7;
+	        picture[47]|= Score_Unit_6_val_8;
 	        break;
 	    case 5:
-	        picture[40]|=0xf0;
-	        picture[41]|=0x80;
-	        picture[42]|=0x80;
-	        picture[43]|=0xe0;
-	        picture[44]|=0x10;
-	        picture[45]|=0x10;
-	        picture[46]|=0x10;
-	        picture[47]|=0xe0;
+	        picture[40]|= Score_Unit_5_val_1;
+	        picture[41]|= Score_Unit_5_val_2;
+	        picture[42]|= Score_Unit_5_val_3;
+	        picture[43]|= Score_Unit_5_val_4;
+	        picture[44]|= Score_Unit_5_val_5;
+	        picture[45]|= Score_Unit_5_val_6;
+	        picture[46]|= Score_Unit_5_val_7;
+	        picture[47]|= Score_Unit_5_val_8;
 	        break;
 	    case 4:
-	        picture[40]|=0x90;
-	        picture[41]|=0x90;
-	        picture[42]|=0x90;
-	        picture[43]|=0x70;
-	        picture[44]|=0x10;
-	        picture[45]|=0x10;
-	        picture[46]|=0x10;
-	        picture[47]|=0x10;
+	        picture[40]|= Score_Unit_4_val_1;
+	        picture[41]|= Score_Unit_4_val_2;
+	        picture[42]|= Score_Unit_4_val_3;
+	        picture[43]|= Score_Unit_4_val_4;
+	        picture[44]|= Score_Unit_4_val_5;
+	        picture[45]|= Score_Unit_4_val_6;
+	        picture[46]|= Score_Unit_4_val_7;
+	        picture[47]|= Score_Unit_4_val_8;
 	        break;
 	    case 3:
-	        picture[40]|=0xe0;
-	        picture[41]|=0x10;
-	        picture[42]|=0x10;
-	        picture[43]|=0x60;
-	        picture[44]|=0x10;
-	        picture[45]|=0x10;
-	        picture[46]|=0x10;
-	        picture[47]|=0xe0;
+	        picture[40]|=Score_Unit_3_val_1;
+	        picture[41]|=Score_Unit_3_val_2;
+	        picture[42]|=Score_Unit_3_val_3;
+	        picture[43]|=Score_Unit_3_val_4;
+	        picture[44]|=Score_Unit_3_val_5;
+	        picture[45]|=Score_Unit_3_val_6;
+	        picture[46]|=Score_Unit_3_val_7;
+	        picture[47]|=Score_Unit_3_val_8;
 	        break;
 	    case 2:
-	        picture[40]|=0x60;
-	        picture[41]|=0x90;
-	        picture[42]|=0x10;
-	        picture[43]|=0x20;
-	        picture[44]|=0x40;
-	        picture[45]|=0x80;
-	        picture[46]|=0x80;
-	        picture[47]|=0xf0;
+	        picture[40]|= Score_Unit_2_val_1;
+	        picture[41]|= Score_Unit_2_val_2;
+	        picture[42]|= Score_Unit_2_val_3;
+	        picture[43]|= Score_Unit_2_val_4;
+	        picture[44]|= Score_Unit_2_val_5;
+	        picture[45]|= Score_Unit_2_val_6;
+	        picture[46]|= Score_Unit_2_val_7;
+	        picture[47]|= Score_Unit_2_val_8;
 	        break;
 	    case 1:
-	        picture[40]|=0x20;
-	        picture[41]|=0x60;
-	        picture[42]|=0x20;
-	        picture[43]|=0x20;
-	        picture[44]|=0x20;
-	        picture[45]|=0x20;
-	        picture[46]|=0x20;
-	        picture[47]|=0x70;
+	        picture[40]|= Score_Unit_1_val_1;
+	        picture[41]|= Score_Unit_1_val_1;
+	        picture[42]|= Score_Unit_1_val_1;
+	        picture[43]|= Score_Unit_1_val_1;
+	        picture[44]|= Score_Unit_1_val_1;
+	        picture[45]|= Score_Unit_1_val_1;
+	        picture[46]|= Score_Unit_1_val_1;
+	        picture[47]|= Score_Unit_1_val_1;
 	        break;
 	    case 0:
-	        picture[40]|=0x60;
-	        picture[41]|=0x90;
-	        picture[42]|=0x90;
-	        picture[43]|=0x90;
-	        picture[44]|=0x90;
-	        picture[45]|=0x90;
-	        picture[46]|=0x90;
-	        picture[47]|=0x60;
+	        picture[40]|= Score_Unit_0_val_1;
+	        picture[41]|= Score_Unit_0_val_2;
+	        picture[42]|= Score_Unit_0_val_3;
+	        picture[43]|= Score_Unit_0_val_4;
+	        picture[44]|= Score_Unit_0_val_5;
+	        picture[45]|= Score_Unit_0_val_6;
+	        picture[46]|= Score_Unit_0_val_7;
+	        picture[47]|= Score_Unit_0_val_8;
 	        break;
 	    }
 	switch(decenas){
 		case 9:
-			picture[124]|=0x0C;
-			picture[125]|=0x12;
-			picture[126]|=0x12;
-			picture[127]|=0x0E;
-			picture[128]|=0x01;
-			picture[129]|=0x01;
-			picture[130]|=0x01;
-			picture[131]|=0x01;
+			picture[124]|= Score_D_9_val_1;
+			picture[125]|= Score_D_9_val_2;
+			picture[126]|= Score_D_9_val_3;
+			picture[127]|= Score_D_9_val_4;
+			picture[128]|= Score_D_9_val_5;
+			picture[129]|= Score_D_9_val_6;
+			picture[130]|= Score_D_9_val_7;
+			picture[131]|= Score_D_9_val_8;
 			break;
 		case 8:
-			picture[124]|=0x0C;
-			picture[125]|=0x12;
-			picture[126]|=0x12;
-			picture[127]|=0x0C;
-			picture[128]|=0x12;
-			picture[129]|=0x12;
-			picture[130]|=0x12;
-			picture[131]|=0x0C;
+			picture[124]|= Score_D_8_val_1;
+			picture[125]|= Score_D_8_val_2;
+			picture[126]|= Score_D_8_val_3;
+			picture[127]|= Score_D_8_val_4;
+			picture[128]|= Score_D_8_val_5;
+			picture[129]|= Score_D_8_val_6;
+			picture[130]|= Score_D_8_val_7;
+			picture[131]|= Score_D_8_val_8;
 			break;
 		case 7:
-			picture[124]|=0x1E;
-			picture[125]|=0x02;
-			picture[126]|=0x02;
-			picture[127]|=0x0E;
-			picture[128]|=0x02;
-			picture[129]|=0x02;
-			picture[130]|=0x02;
-			picture[131]|=0x02;
+			picture[124]|= Score_D_7_val_1;
+			picture[125]|= Score_D_7_val_2;
+			picture[126]|= Score_D_7_val_3;
+			picture[127]|= Score_D_7_val_4;
+			picture[128]|= Score_D_7_val_5;
+			picture[129]|= Score_D_7_val_6;
+			picture[130]|= Score_D_7_val_7;
+			picture[131]|= Score_D_7_val_8;
 			break;
 		case 6:
-			picture[124]|=0x0E;
-			picture[125]|=0x10;
-			picture[126]|=0x10;
-			picture[127]|=0x0C;
-			picture[128]|=0x12;
-			picture[129]|=0x12;
-			picture[130]|=0x12;
-			picture[131]|=0x0C;
+			picture[124]|= Score_D_6_val_1;
+			picture[125]|= Score_D_6_val_2;
+			picture[126]|= Score_D_6_val_3;
+			picture[127]|= Score_D_6_val_4;
+			picture[128]|= Score_D_6_val_5;
+			picture[129]|= Score_D_6_val_6;
+			picture[130]|= Score_D_6_val_7;
+			picture[131]|= Score_D_6_val_8;
 			break;
 		case 5:
-			picture[124]|=0x1E;
-			picture[125]|=0x10;
-			picture[126]|=0x10;
-			picture[127]|=0x1C;
-			picture[128]|=0x20;
-			picture[129]|=0x20;
-			picture[130]|=0x20;
-			picture[131]|=0x1C;
+			picture[124]|= Score_D_5_val_1;
+			picture[125]|= Score_D_5_val_2;
+			picture[126]|= Score_D_5_val_3;
+			picture[127]|= Score_D_5_val_4;
+			picture[128]|= Score_D_5_val_5;
+			picture[129]|= Score_D_5_val_6;
+			picture[130]|= Score_D_5_val_7;
+			picture[131]|= Score_D_5_val_8;
 			break;
 		case 4:
-			picture[124]|=0x12;
-			picture[125]|=0x12;
-			picture[126]|=0x12;
-			picture[127]|=0x0E;
-			picture[128]|=0x02;
-			picture[129]|=0x02;
-			picture[130]|=0x02;
-			picture[131]|=0x02;
+			picture[124]|= Score_D_4_val_1;
+			picture[125]|= Score_D_4_val_2;
+			picture[126]|= Score_D_4_val_3;
+			picture[127]|= Score_D_4_val_4;
+			picture[128]|= Score_D_4_val_5;
+			picture[129]|= Score_D_4_val_6;
+			picture[130]|= Score_D_4_val_7;
+			picture[131]|= Score_D_4_val_8;
 			break;
 		case 3:
-			picture[124]|=0x1C;
-			picture[125]|=0x02;
-			picture[126]|=0x02;
-			picture[127]|=0x0C;
-			picture[128]|=0x02;
-			picture[129]|=0x02;
-			picture[130]|=0x02;
-			picture[131]|=0x1C;
+			picture[124]|= Score_D_3_val_1;
+			picture[125]|= Score_D_3_val_2;
+			picture[126]|= Score_D_3_val_3;
+			picture[127]|= Score_D_3_val_4;
+			picture[128]|= Score_D_3_val_5;
+			picture[129]|= Score_D_3_val_6;
+			picture[130]|= Score_D_3_val_7;
+			picture[131]|= Score_D_3_val_8;
 			break;
 		case 2:
-			picture[124]|=0x0C;
-			picture[125]|=0x12;
-			picture[126]|=0x02;
-			picture[127]|=0x04;
-			picture[128]|=0x08;
-			picture[129]|=0x10;
-			picture[130]|=0x10;
-			picture[131]|=0x1E;
+			picture[124]|= Score_D_2_val_1;
+			picture[125]|= Score_D_2_val_2;
+			picture[126]|= Score_D_2_val_3;
+			picture[127]|= Score_D_2_val_4;
+			picture[128]|= Score_D_2_val_5;
+			picture[129]|= Score_D_2_val_6;
+			picture[130]|= Score_D_2_val_7;
+			picture[131]|= Score_D_2_val_8;
 			break;
 		case 1:
-			picture[124]|=0x04;
-			picture[125]|=0x0C;
-			picture[126]|=0x04;
-			picture[127]|=0x04;
-			picture[128]|=0x04;
-			picture[129]|=0x04;
-			picture[130]|=0x04;
-			picture[131]|=0x0E;
+			picture[124]|= Score_D_1_val_1;
+			picture[125]|= Score_D_1_val_2;
+			picture[126]|= Score_D_1_val_3;
+			picture[127]|= Score_D_1_val_4;
+			picture[128]|= Score_D_1_val_5;
+			picture[129]|= Score_D_1_val_6;
+			picture[130]|= Score_D_1_val_7;
+			picture[131]|= Score_D_1_val_8;
 			break;
 		case 0:
-			picture[124]|=0x0C;
-			picture[125]|=0x12;
-			picture[126]|=0x12;
-			picture[127]|=0x12;
-			picture[128]|=0x12;
-			picture[129]|=0x12;
-			picture[130]|=0x12;
-			picture[131]|=0x0C;
+			picture[124]|= Score_D_0_val_1;
+			picture[125]|= Score_D_0_val_2;
+			picture[126]|= Score_D_0_val_3;
+			picture[127]|= Score_D_0_val_4;
+			picture[128]|= Score_D_0_val_5;
+			picture[129]|= Score_D_0_val_6;
+			picture[130]|= Score_D_0_val_7;
+			picture[131]|= Score_D_0_val_8;
 			break;
 		}
 }
-
 
 static void LCD_nokia_delay(void)
 {
@@ -341,21 +338,21 @@ void LCD_nokia_init(void)
 	LCD_nokia_delay();
 	GPIO_set_pin_value_on(C, RESET_PIN);
 
-	LCD_nokia_write_byte(LCD_CMD, 0x21,LCD_0); //Tell LCD that extended commands follow
-	LCD_nokia_write_byte(LCD_CMD, 0xBF,LCD_0); //Set LCD Vop (Contrast): Try 0xB1(good @ 3.3V) or 0xBF if your display is too dark
-	LCD_nokia_write_byte(LCD_CMD, 0x04,LCD_0); //Set Temp coefficent
-	LCD_nokia_write_byte(LCD_CMD, 0x14,LCD_0); //LCD bias mode 1:48: Try 0x13 or 0x14
+	LCD_nokia_write_byte(LCD_CMD, LCD_Ext_comm,LCD_0); //Tell LCD that extended commands follow
+	LCD_nokia_write_byte(LCD_CMD, LCD_Contrast,LCD_0); //Set LCD Vop (Contrast): Try 0xB1(good @ 3.3V) or 0xBF if your display is too dark
+	LCD_nokia_write_byte(LCD_CMD, LCD_Temp_Coef,LCD_0); //Set Temp coefficent
+	LCD_nokia_write_byte(LCD_CMD, LCD_BiasMode,LCD_0); //LCD bias mode 1:48: Try 0x13 or 0x14
 
-	LCD_nokia_write_byte(LCD_CMD, 0x20,LCD_0); //We must send 0x20 before modifying the display control mode
-	LCD_nokia_write_byte(LCD_CMD, 0x0C,LCD_0); //Set display control, normal mode. 0x0D for inverse
+	LCD_nokia_write_byte(LCD_CMD, LCD_PreDispControl,LCD_0); //We must send 0x20 before modifying the display control mode
+	LCD_nokia_write_byte(LCD_CMD, LCD_DispControl,LCD_0); //Set display control, normal mode. 0x0D for inverse
 
-	LCD_nokia_write_byte(LCD_CMD, 0x21,LCD_1); //Tell LCD that extended commands follow
-	LCD_nokia_write_byte(LCD_CMD, 0xBF,LCD_1); //Set LCD Vop (Contrast): Try 0xB1(good @ 3.3V) or 0xBF if your display is too dark
-	LCD_nokia_write_byte(LCD_CMD, 0x04,LCD_1); //Set Temp coefficent
-	LCD_nokia_write_byte(LCD_CMD, 0x14,LCD_1); //LCD bias mode 1:48: Try 0x13 or 0x14
+	LCD_nokia_write_byte(LCD_CMD, LCD_Ext_comm,LCD_1); //Tell LCD that extended commands follow
+	LCD_nokia_write_byte(LCD_CMD, LCD_Contrast,LCD_1); //Set LCD Vop (Contrast): Try 0xB1(good @ 3.3V) or 0xBF if your display is too dark
+	LCD_nokia_write_byte(LCD_CMD, LCD_Temp_Coef,LCD_1); //Set Temp coefficent
+	LCD_nokia_write_byte(LCD_CMD, LCD_BiasMode,LCD_1); //LCD bias mode 1:48: Try 0x13 or 0x14
 
-	LCD_nokia_write_byte(LCD_CMD, 0x20,LCD_1); //We must send 0x20 before modifying the display control mode
-	LCD_nokia_write_byte(LCD_CMD, 0x0C,LCD_1); //Set display control, normal mode. 0x0D for inverse
+	LCD_nokia_write_byte(LCD_CMD, LCD_PreDispControl,LCD_1); //We must send 0x20 before modifying the display control mode
+	LCD_nokia_write_byte(LCD_CMD, LCD_DispControl,LCD_1); //Set display control, normal mode. 0x0D for inverse
 }
 
 void LCD_nokia_bitmap(uint8_t bitmap[],uint8_t lcdScreen_selector){
@@ -457,9 +454,10 @@ void LCD_MenuScreen(){
 }
 
 void LCD_GameOverScreenWinner(uint8_t selector,uint8_t score){
+	//falta añadirle el score
 	static uint8_t picture[SIZE_IN_BYTES];
 	LCD_image_GetWinnerImage(picture);
-	LCD_image_to_Score (picture, score);
+	LCD_image_to_Score(picture,score);
 	if(1 == selector){
 		LCD_nokia_clear(LCD_0);
 		LCD_nokia_bitmap(picture,LCD_0);
@@ -471,9 +469,10 @@ void LCD_GameOverScreenWinner(uint8_t selector,uint8_t score){
 }
 
 void LCD_GameOverScreenLoser(uint8_t selector,uint8_t score){
+	//falta añadirle el score
 	static uint8_t picture[SIZE_IN_BYTES];
 	LCD_image_GetLoserImage(picture);
-	LCD_image_to_Score (picture, score);
+	LCD_image_to_Score(picture,score);
 	if(1 == selector){
 		LCD_nokia_clear(LCD_0);
 		LCD_nokia_bitmap(picture,LCD_0);
@@ -498,7 +497,7 @@ static void LCD_image_to_game (uint8_t * picture, uint16_t fila, uint16_t column
 	        picture[dato]|= MAP_COL_9A_MASK;
 	        dato++;
 	        picture[dato]|= MAP_COL_9A_MASK;
-	        dato = 180+(3*fila);
+	        dato = MAP_offset_2+(3*fila);
 	        picture[dato]|= MAP_COL_9B_MASK;
 	        dato ++;
 	        picture[dato]|= MAP_COL_9B_MASK;
@@ -723,6 +722,64 @@ static void LCD_hold_pixel(uint8_t * base, uint8_t arena[][MAP_HOLD_SIZE]){
     }
 }
 
+static void LCD_image_to_bar (uint8_t * picture, uint16_t score){
+	static uint16_t i = 0;
+	static uint16_t limite = 0;
+	switch(score){
+		case 16:
+			limite=Bar_Mask_16;
+			break;
+		case 15:
+			limite=Bar_Mask_15;
+			break;
+		case 14:
+			limite=Bar_Mask_14;
+			break;
+		case 13:
+			limite=Bar_Mask_13;
+			break;
+		case 12:
+			limite=Bar_Mask_12;
+			break;
+		case 11:
+			limite=Bar_Mask_11;
+			break;
+		case 10:
+			limite=Bar_Mask_10;
+			break;
+		case 9:
+			limite=Bar_Mask_9;
+			break;
+		case 8:
+			limite=Bar_Mask_8;
+			break;
+		case 7:
+			limite=Bar_Mask_7;
+			break;
+		case 6:
+			limite=Bar_Mask_6;
+			break;
+		case 5:
+			limite=Bar_Mask_5;
+			break;
+		case 4:
+			limite=Bar_Mask_4;
+			break;
+		case 3:
+			limite=Bar_Mask_3;
+			break;
+		case 2:
+			limite=Bar_Mask_2;
+			break;
+		case 1:
+			limite=Bar_Mask_1;
+			break;
+		default:
+			limite = Bar_Mask_limit;
+	}
+	for(i=Bar_Mask_limit;i>limite;i--)
+		picture[i]|=Bar_Mask_LCD;
+}
 
 void LCD_GameToLCD(game_info_t * gameInfo,uint8_t selector){
 	static uint8_t image[SIZE_IN_BYTES];
@@ -730,7 +787,6 @@ void LCD_GameToLCD(game_info_t * gameInfo,uint8_t selector){
 	LCD_arena_pixel(image,gameInfo->board);
 	LCD_next_pixel(image,gameInfo->next_tetromino.shape);
 	LCD_hold_pixel(image,gameInfo->hold_tetromino.shape);
+	LCD_image_to_bar(image,gameInfo->rowsToAdd);
 	LCD_nokia_bitmap(image,selector);
 }
-
-
