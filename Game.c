@@ -20,11 +20,14 @@ void GameInit(){
 	LCD_LoadingScreen();
 	I2C_init();
 	//get music	from memory
+
 	Watchdog_ResetDetection();
 	PIT_init();
 	DAC_init();
 	DMA_init();
 	//get score from memory
+	Score_GetInitialScores(&g_score1,&g_score2);
+
 	NVIC_init();
 	GPIO_callback_init(Tetromino_HandlerForGPIO1,Tetromino_HandlerForGPIO2);
 	PIT_callback_init(Tetromino_HandlerForPit);
@@ -34,7 +37,7 @@ void GameInit(){
 static void StartGame(){
 	//reset status,boards and flags and show game
 	Tetromino_ResetAndStart();
-	//star music
+	//start music
 	Music_PlayMusic();
 	//start pit 2
 	Tetromino_ResetFallData();
@@ -63,20 +66,9 @@ void GameRunning(){
 			}
 			if(1 == Tetromino_GetGeneralGameOverStatus()){
 				GPIO_Disable_IRQ();
-				//check who lost and register it
-				if(1 == Tetromino_GetGameOverStatus(GAME1)){
-					g_score2++;
-					LCD_GameOverScreenWinner(GAME2,g_score2);
-					LCD_GameOverScreenLoser(GAME1,g_score1);
-				}
-				else{
-					g_score1++;
-					LCD_GameOverScreenWinner(GAME1,g_score1);
-					LCD_GameOverScreenLoser(GAME2,g_score2);
-				}
+				Score_EndGameScore(&g_score1,&g_score2);
 				//stop music
 				Music_StopMusic();
-				//save scores to memory
 				//stop pit 2
 				PIT_StopTimer(PIT, kPIT_Chnl_2);	//Habilita el timer del pit1
 				Tetromino_ResetFallData();

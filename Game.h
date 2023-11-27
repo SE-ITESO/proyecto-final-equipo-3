@@ -19,6 +19,7 @@
 #include "DMA.h"
 #include "NVIC.h"
 #include "Tetromino.h"
+#include "Score.h"
 
 #define PLAYER1_PORT B
 #define PLAYER1_DOWN pin19

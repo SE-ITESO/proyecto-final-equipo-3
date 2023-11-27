@@ -13,8 +13,12 @@
 
 #include "DMA.h"
 #include "PIT.h"
+#include "I2C.h"
 
 #define MUSIC_LENGHT 0x12C3A
+#define MUSIC_BASEADDR 64
+
+void Music_GetMusic();
 
 void Music_PlayMusic();
 
