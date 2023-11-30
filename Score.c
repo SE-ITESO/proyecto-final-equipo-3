@@ -1,10 +1,11 @@
-/*
- * Score.c
+/*@File 	Score.c
  *
- *  Created on: 26 nov 2023
- *      Author: CoolingCoder
- */
-
+ *@Authors 	Pedro Fregoso
+ *			Andres Nuñez
+ *
+ *@Brief	This file is capable of setting up the configuration and functions
+ *			for the use of the score saved in memory
+*/
 
 #include "Score.h"
 
@@ -29,7 +30,7 @@ void Score_EndGameScore(uint8_t * score1, uint8_t * score2){
 		LCD_GameOverScreenLoser(GAME1,*score1);
 	}
 	else{
-		*score2 += 1;
+		*score1 += 1;
 		LCD_GameOverScreenWinner(GAME1,*score1);
 		LCD_GameOverScreenLoser(GAME2,*score2);
 	}

@@ -17,12 +17,12 @@
 
 #define IRQ_CLEAN_MASK 1
 
-#define WDOG_TIME_US 			1500000 //1s para WDOG
-#define SAMPLE_PERIOD_US	 	333 //16k Frecuencia de muestreo
+#define WDOG_TIME_US 			1500000 //1.5s para WDOG
+#define LOADING_TIME_US 		5000000 //5s para WDOG
+#define SAMPLE_PERIOD_US	 	417 //16k Frecuencia de muestreo
 #define INGAME_TIME_US	 		200000
 
-void PIT1_IRQHandler ();
-
+uint8_t PIT3_GetIRQFlag();
 void PIT_init();
 void PIT_clear_wdog_refresh_f();
 uint8_t PIT_get_wdog_refresh_f();

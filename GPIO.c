@@ -342,7 +342,7 @@ void GPIO_Enable_IRQ(){
 	temp_address = PCR_PTB_BASE + pin23;
 	* temp_address |= PCR_INTERRUPT_VALUE;
 	//P1-HOLD
-	temp_address = PCR_PTB_BASE + pin2;
+	temp_address = PCR_PTB_BASE + pin10;
 	* temp_address |= PCR_INTERRUPT_VALUE;
 
 	//P2-DOWN

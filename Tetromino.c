@@ -1,10 +1,11 @@
-/*
- * Tetromino.c
+/*@File 	Sounds.c
  *
- *  Created on: 8 nov 2023
- *      Author: CoolingCoder
- */
-
+ *@Authors 	Pedro Fregoso
+ *			Andres Nuñez
+ *
+ *@Brief	This file is capable of setting the functions that dictacte the way the
+ *@Brief	tetromino's behavior is during the game
+*/
 
 #include "Tetromino.h"
 

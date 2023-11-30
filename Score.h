@@ -1,9 +1,11 @@
-/*
- * Score.h
+/*@File 	Score.c
  *
- *  Created on: 26 nov 2023
- *      Author: CoolingCoder
- */
+ *@Authors 	Pedro Fregoso
+ *			Andres Nuñez
+ *
+ *@Brief	This file is capable of setting up the configuration and functions
+ *			for the use of the score saved in memory
+*/
 
 #ifndef SCORE_H_
 #define SCORE_H_

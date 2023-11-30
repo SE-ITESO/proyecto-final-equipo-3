@@ -1,4 +1,4 @@
-/*@File 	Sounds.c
+/*@File 	Music.c
  *
  *@Authors 	Pedro Fregoso
  *			Andres Nuñez
@@ -13,12 +13,8 @@
 
 #include "DMA.h"
 #include "PIT.h"
-#include "I2C.h"
 
-#define MUSIC_LENGHT 0x12C3A
-#define MUSIC_BASEADDR 64
-
-void Music_GetMusic();
+#define MUSIC_LENGHT 30768
 
 void Music_PlayMusic();
 
