@@ -31,7 +31,7 @@ void DMA_init(){
 	EDMA_ResetChannel(EDMA_Handle.base, EDMA_Handle.channel);
 }
 
-void DMA_SendSound(uint16_t * source, uint16_t size){
+void DMA_SendMusic(uint16_t * source, uint32_t size){
 	static edma_transfer_config_t transferConfig;
 	EDMA_PrepareTransferConfig(&transferConfig,
 			   source,
@@ -51,8 +51,8 @@ void DMA_SendSound(uint16_t * source, uint16_t size){
 
    EDMA_TcdSetTransferConfig(tcdMemoryPoolPtr, &transferConfig, NULL);
 
-   EDMA_TcdEnableInterrupts(&tcdMemoryPoolPtr[0], kEDMA_MajorInterruptEnable);
-   EDMA_TcdEnableAutoStopRequest(&tcdMemoryPoolPtr[0], true);
+   //EDMA_TcdEnableInterrupts(&tcdMemoryPoolPtr[0], kEDMA_MajorInterruptEnable);
+   EDMA_TcdEnableAutoStopRequest(&tcdMemoryPoolPtr[0], false);
    EDMA_InstallTCD(DMA0, DMA_CHN_0, &tcdMemoryPoolPtr[0]);
    EDMA_EnableChannelRequest(DMA0, DMA_CHN_0);
    PIT_StartTimer(PIT, kPIT_Chnl_0);

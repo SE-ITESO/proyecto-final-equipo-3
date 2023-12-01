@@ -1,10 +1,11 @@
-/*
- * Tetromino.c
+/*@File 	Sounds.c
  *
- *  Created on: 8 nov 2023
- *      Author: CoolingCoder
- */
-
+ *@Authors 	Pedro Fregoso
+ *			Andres Nuñez
+ *
+ *@Brief	This file is capable of setting the functions that dictacte the way the
+ *@Brief	tetromino's behavior is during the game
+*/
 
 #include "Tetromino.h"
 
@@ -568,13 +569,13 @@ void Tetromino_HandlerForPit(){
 		Tetromino_moveDown(&g_game2Info);
 	}
 	if(0 == g_fall_data.twoMin_f){
-		if(0 == g_fall_data.counter % TWO_MIN_MARK){//si ya pasaron 2 min
+		if(0 == g_fall_data.counter % HALF_MIN_MARK){//si ya pasaron 0.5 min
 			g_fall_data.twoMin_f = 1;
 			g_fall_data.module = 2;
 		}
 	}
 	else if(0 == g_fall_data.fourMin_f){
-		if(0 == g_fall_data.counter % FOUR_MIN_MARK){//si ya pasaron 2 min
+		if(0 == g_fall_data.counter % ONE_MIN_MARK){//si ya pasaron 2 min
 			g_fall_data.fourMin_f = 1;
 			g_fall_data.module = 1;
 		}

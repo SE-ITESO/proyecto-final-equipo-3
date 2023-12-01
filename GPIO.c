@@ -342,7 +342,7 @@ void GPIO_Enable_IRQ(){
 	temp_address = PCR_PTB_BASE + pin23;
 	* temp_address |= PCR_INTERRUPT_VALUE;
 	//P1-HOLD
-	temp_address = PCR_PTB_BASE + pin2;
+	temp_address = PCR_PTB_BASE + pin10;
 	* temp_address |= PCR_INTERRUPT_VALUE;
 
 	//P2-DOWN
@@ -451,18 +451,18 @@ void GPIO_init(){
 	GPIO_turn_port_clock_on (C); //Encender clock
 	GPIO_turn_port_clock_on (D); //Encender clock
 
-	//PINES SONIDOS
+	//PINES PLAYER
 	GPIO_set_pcr(B, pin19,PCR_INPUT_CONFIG);	//DOWN
 	GPIO_set_pcr(B, pin18,PCR_INPUT_CONFIG);	//LEFT
 	GPIO_set_pcr(B, pin9,PCR_INPUT_CONFIG);		//RIGHT
 	GPIO_set_pcr(B, pin23,PCR_INPUT_CONFIG);	//ROTATE
-	GPIO_set_pcr(B, pin2,PCR_INPUT_CONFIG);		//HOLD
+	GPIO_set_pcr(B, pin10,PCR_INPUT_CONFIG);	//HOLD
 
 	GPIO_set_pcr(C, pin1,PCR_INPUT_CONFIG);		//DOWN
 	GPIO_set_pcr(C, pin8,PCR_INPUT_CONFIG);		//LEFT
 	GPIO_set_pcr(C, pin9,PCR_INPUT_CONFIG);		//RIGHT
 	GPIO_set_pcr(C, pin0,PCR_INPUT_CONFIG);		//ROTATE
-	GPIO_set_pcr(C, pin10,PCR_INPUT_CONFIG);		//HOLD
+	GPIO_set_pcr(C, pin10,PCR_INPUT_CONFIG);	//HOLD
 
 	//I2C
 	GPIO_set_pcr(B, pin2,PCR_I2C_CONFIG);	//CLK

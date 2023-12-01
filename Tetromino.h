@@ -1,9 +1,11 @@
-/*
- * Tetromino.h
+/*@File 	Sounds.c
  *
- *  Created on: 8 nov 2023
- *      Author: CoolingCoder
- */
+ *@Authors 	Pedro Fregoso
+ *			Andres Nuñez
+ *
+ *@Brief	This file is capable of setting the macro functions anda data types related
+ *@Brief	to the tetromino's behavior is during the game
+*/
 
 #ifndef TETROMINO_H_
 #define TETROMINO_H_
@@ -20,8 +22,8 @@
 #define NUMBER_OF_TETROMINOS 7
 #define INVALID_NUMBER 200
 
-#define TWO_MIN_MARK 600
-#define FOUR_MIN_MARK 1200
+#define HALF_MIN_MARK 150
+#define ONE_MIN_MARK 300
 
 
 #define P1_DOWN_MASK 0x80000

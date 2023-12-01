@@ -1,9 +1,12 @@
-/*
- * Config.h
+/*@File 	Config.h
  *
- *  Created on: 10 nov 2023
- *      Author: CoolingCoder
- */
+ *@Authors 	Pedro Fregoso
+ *			Andres Nuñez
+ *
+ *@Brief	This file is created for managing data types that are
+ *@Brief	crucial for the game and the tetrominos behavior
+*/
+
 
 #ifndef CONFIG_H_
 #define CONFIG_H_

@@ -1,13 +1,18 @@
-/*
- * Game.c
+/*@File 	Game.c
  *
- * 		Created on: 9 nov 2023
- *      Author: CoolingCoder
- */
+ *@Authors 	Pedro Fregoso
+ *			Andres Nuñez
+ *
+ *@Brief	This file is capable of initializing all the important
+ *@Brief	elements of the proyect such as GPIO,PIT,DAC,WDOG,SPI,I2C
+ *@Brief	NVIC and controlling the interactions with GPIO such as
+ *@Brief	interruption callbacks and polling the flags to do an
+ *@Brief	specific action
+*/
 
 #include "Game.h"
 
-state_t g_state;
+state_t g_state = LOADING;
 
 uint8_t g_score1 = 0;
 uint8_t g_score2 = 0;
@@ -19,23 +24,23 @@ void GameInit(){
 	LCD_nokia_init();
 	LCD_LoadingScreen();
 	I2C_init();
-	//get music	from memory
 	Watchdog_ResetDetection();
 	PIT_init();
 	DAC_init();
 	DMA_init();
 	//get score from memory
+	Score_GetInitialScores(&g_score1,&g_score2);
+
 	NVIC_init();
 	GPIO_callback_init(Tetromino_HandlerForGPIO1,Tetromino_HandlerForGPIO2);
 	PIT_callback_init(Tetromino_HandlerForPit);
-	LCD_MenuScreen();
 }
 
 static void StartGame(){
 	//reset status,boards and flags and show game
 	Tetromino_ResetAndStart();
-	//star music
-
+	//start music
+	Music_PlayMusic();
 	//start pit 2
 	Tetromino_ResetFallData();
 	PIT_StartTimer(PIT, kPIT_Chnl_2);	//Habilita el timer del pit1
@@ -44,6 +49,13 @@ static void StartGame(){
 
 void GameRunning(){
 	switch(g_state){
+		case LOADING:
+			if(0 == PIT3_GetIRQFlag()){
+				g_state = GAME_OVER;
+				PIT_StopTimer(PIT, kPIT_Chnl_3);
+				LCD_MenuScreen();
+			}
+			break;
 		case GAME_OVER:
 			if(0 == GPIO_get_pin_value(PLAYER1_PORT, PLAYER1_DOWN) && 0 == GPIO_get_pin_value(PLAYER2_PORT, PLAYER2_DOWN)){
 				StartGame();
@@ -63,19 +75,9 @@ void GameRunning(){
 			}
 			if(1 == Tetromino_GetGeneralGameOverStatus()){
 				GPIO_Disable_IRQ();
-				//check who lost and register it
-				if(1 == Tetromino_GetGameOverStatus(GAME1)){
-					g_score2++;
-					LCD_GameOverScreenWinner(GAME2,g_score2);
-					LCD_GameOverScreenLoser(GAME1,g_score1);
-				}
-				else{
-					g_score1++;
-					LCD_GameOverScreenWinner(GAME1,g_score1);
-					LCD_GameOverScreenLoser(GAME2,g_score2);
-				}
+				Score_EndGameScore(&g_score1,&g_score2);
 				//stop music
-				//save scores to memory
+				Music_StopMusic();
 				//stop pit 2
 				PIT_StopTimer(PIT, kPIT_Chnl_2);	//Habilita el timer del pit1
 				Tetromino_ResetFallData();

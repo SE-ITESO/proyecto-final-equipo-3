@@ -13,6 +13,7 @@
 //PIT_GetCurrentTimerCount(base, channel)
 
 uint8_t g_wdog_refresh = 0;
+uint8_t g_pit3_loading = 1;
 volatile static void (*PIT_callback)() = 0;
 
 void PIT1_IRQHandler (){
@@ -25,6 +26,16 @@ void PIT2_IRQHandler (){
 		PIT_callback();
 	}
 	PIT_ClearStatusFlags(PIT,kPIT_Chnl_2,IRQ_CLEAN_MASK);
+}
+
+
+void PIT3_IRQHandler (){
+	g_pit3_loading = 0;
+	PIT_ClearStatusFlags(PIT,kPIT_Chnl_3,IRQ_CLEAN_MASK);
+}
+
+uint8_t PIT3_GetIRQFlag(){
+	return g_pit3_loading;
 }
 
 void PIT_clear_wdog_refresh_f(){
@@ -56,13 +67,19 @@ void PIT_init(){
 	PIT_SetTimerPeriod(PIT, kPIT_Chnl_0, USEC_TO_COUNT(SAMPLE_PERIOD_US, clock)); //Indica el periodo para el canal 0 del PIT
 
 	//PIT1 WDOG
-	PIT_SetTimerPeriod(PIT, kPIT_Chnl_1, USEC_TO_COUNT(WDOG_TIME_US, clock)); //Indica el periodo para el canal 0 del PIT
+	PIT_SetTimerPeriod(PIT, kPIT_Chnl_1, USEC_TO_COUNT(WDOG_TIME_US, clock)); //Indica el periodo para el canal 1 del PIT
 	PIT_EnableInterrupts(PIT, kPIT_Chnl_1, kPIT_TimerInterruptEnable);	//Habilita la interrupcion del pit
 	EnableIRQ(PIT1_IRQn);	//Habilita la interrupcion de NVIC
 	PIT_StartTimer(PIT, kPIT_Chnl_1);	//Habilita el timer del pit1
 
 	//PIT2 INGAME_Time
-	PIT_SetTimerPeriod(PIT, kPIT_Chnl_2, USEC_TO_COUNT(INGAME_TIME_US, clock)); //Indica el periodo para el canal 0 del PIT
+	PIT_SetTimerPeriod(PIT, kPIT_Chnl_2, USEC_TO_COUNT(INGAME_TIME_US, clock)); //Indica el periodo para el canal 2 del PIT
 	PIT_EnableInterrupts(PIT, kPIT_Chnl_2, kPIT_TimerInterruptEnable);	//Habilita la interrupcion del pit
 	EnableIRQ(PIT2_IRQn);	//Habilita la interrupcion de NVIC
+
+	//PIT3 LOADING TIME
+	PIT_SetTimerPeriod(PIT, kPIT_Chnl_3, USEC_TO_COUNT(LOADING_TIME_US, clock)); //Indica el periodo para el canal 3 del PIT
+	PIT_EnableInterrupts(PIT, kPIT_Chnl_3, kPIT_TimerInterruptEnable);	//Habilita la interrupcion del pit
+	EnableIRQ(PIT3_IRQn);	//Habilita la interrupcion de NVIC
+	PIT_StartTimer(PIT, kPIT_Chnl_3);	//Habilita el timer del pit3
 }

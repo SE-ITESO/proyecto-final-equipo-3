@@ -1,9 +1,11 @@
-/*
- * Game.h
+/*@File 	Game.c
  *
- *  Created on: 9 nov 2023
- *      Author: CoolingCoder
- */
+ *@Authors 	Pedro Fregoso
+ *			Andres Nuñez
+ *
+ *@Brief	This file is capable of defining the functions Macros and data types
+ *			for the use of the Game module and the main control area of the proyect
+*/
 
 #ifndef GAME_H_
 #define GAME_H_
@@ -19,6 +21,7 @@
 #include "DMA.h"
 #include "NVIC.h"
 #include "Tetromino.h"
+#include "Score.h"
 
 #define PLAYER1_PORT B
 #define PLAYER1_DOWN pin19
@@ -30,6 +33,7 @@
 #define GAME2 2
 
 typedef enum{
+	LOADING,
 	GAME_OVER,
 	PLAYING
 }state_t;

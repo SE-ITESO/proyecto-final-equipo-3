@@ -3,7 +3,8 @@
  *@Authors 	Pedro Fregoso
  *			Andres Nuñez
  *
- *@Brief	This file is capable of defining the function to retrieve the bitmap for a Band's Logo
+ *@Brief	This file is capable of defining the macro functions to retrieve the bitmap
+ *@Brief	or different parts of the game flow
 */
 #ifndef LCD_NOKIA_IMAGES_H_
 #define LCD_NOKIA_IMAGES_H_
